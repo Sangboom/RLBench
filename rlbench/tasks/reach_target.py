@@ -60,10 +60,10 @@ class ReachTarget(Task):
     #     suc, _ = self.success()
     #     if suc:
     #         print('success!')
-    #         r = 1
+    #         r = 10
     #     else :
     #         g_pos = self.target.get_position()
-    #         t_pos = self.robot.gripper.get_position()
+    #         t_pos = self.robot.arm.get_tip().get_position()
     #         # dis_sqr = (g_pos[0]-t_pos[0]) * (g_pos[0]-t_pos[0]) + (g_pos[1]-t_pos[1]) * (g_pos[1]-t_pos[1]) + (g_pos[2]-t_pos[2]) * (g_pos[2]-t_pos[2])
     #         # dis = math.sqrt(dis_sqr)
     #         # r = 0 - dis
