@@ -59,7 +59,7 @@ class ReachTarget(Task):
     #     #if self.robot.gripper.check_collision(self.target):
     #     suc, _ = self.success()
     #     if suc:
-    #         print('success!')
+    #         print('=====================success!==========================')
     #         r = 10
     #     else :
     #         g_pos = self.target.get_position()
