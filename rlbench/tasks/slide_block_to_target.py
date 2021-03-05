@@ -46,9 +46,9 @@ class SlideBlockToTarget(Task):
             b_pos = self.block.get_position()
             g_pos = self.target.get_position()
             t_pos = self.robot.arm.get_tip().get_position()
-            dis_sqr1 = (g_pos[0]-t_pos[0]) * (g_pos[0]-t_pos[0]) + (g_pos[1]-t_pos[1]) * (g_pos[1]-t_pos[1]) + (g_pos[2]-t_pos[2]) * (g_pos[2]-t_pos[2])
+            # dis_sqr1 = (g_pos[0]-t_pos[0]) * (g_pos[0]-t_pos[0]) + (g_pos[1]-t_pos[1]) * (g_pos[1]-t_pos[1]) + (g_pos[2]-t_pos[2]) * (g_pos[2]-t_pos[2])
             dis_sqr2 = (b_pos[0]-t_pos[0]) * (b_pos[0]-t_pos[0]) + (b_pos[1]-t_pos[1]) * (b_pos[1]-t_pos[1]) + (b_pos[2]-t_pos[2]) * (b_pos[2]-t_pos[2])
             dis_sqr3 = (g_pos[0]-b_pos[0]) * (g_pos[0]-b_pos[0]) + (g_pos[1]-b_pos[1]) * (g_pos[1]-b_pos[1]) + (g_pos[2]-b_pos[2]) * (g_pos[2]-b_pos[2])
-            dis = math.sqrt(dis_sqr1) + math.sqrt(dis_sqr2) + math.sqrt(dis_sqr3)
+            dis = math.sqrt(dis_sqr2) + math.sqrt(dis_sqr3)
             r = 0 - dis
         return r
