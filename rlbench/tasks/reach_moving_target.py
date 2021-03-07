@@ -7,6 +7,7 @@ from rlbench.backend.task import Task
 from rlbench.backend.spawn_boundary import SpawnBoundary
 from rlbench.backend.conditions import DetectedCondition
 
+import math
 
 class ReachMovingTarget(Task):
 
@@ -49,8 +50,9 @@ class ReachMovingTarget(Task):
             v = 0.01
         elif A[1] > 1.0:
             v = -0.01
+        A[1] = A[1] + v
 
-        self.target.set_position(A + v)
+        self.target.set_position(A)
         
     def reward(self) -> float:
         #if self.robot.gripper.check_collision(self.target):
