@@ -14,6 +14,7 @@ class ReachMovingTarget(Task):
     def init_task(self) -> None:
         self.target = Shape('target')
         self.boundaries = Shape('boundary')
+        self.direction = 0.005
         success_sensor = ProximitySensor('success')
         self.register_success_conditions(
             [DetectedCondition(self.robot.arm.get_tip(), success_sensor)])
@@ -45,12 +46,12 @@ class ReachMovingTarget(Task):
 
     def step(self) -> None:
         A = self.target.get_position()
-        v = 0.01
-        if A[1] < -1.0:
-            v = 0.01
-        elif A[1] > 1.0:
-            v = -0.01
-        A[1] = A[1] + v
+        if A[1] < -0.3:
+            self.direction = 0.005
+        elif A[1] > 0.3:
+            self.direction = -0.005
+        
+        A[1] = A[1] + self.direction
 
         self.target.set_position(A)
         
