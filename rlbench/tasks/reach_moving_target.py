@@ -35,18 +35,32 @@ class ReachMovingTarget(Task):
 
     def get_low_dim_state(self) -> np.ndarray:
         # One of the few tasks that have a custom low_dim_state function.
-        return np.array(self.target.get_position())
+        target_pos = np.array(self.target.get_position())
+        tip_pos = np.array(self.robot.arm.get_tip().get_position())
+        return np.concatenate((target_pos, tip_pos), axis=None)
 
     def is_static_workspace(self) -> bool:
         return True
 
     def step(self) -> None:
         A = self.target.get_position()
-        if A[0] > 0.0:
-            A[0] = A[0] + 0.01
-            self.target.set_position(A)
-        elif A[0] <= 0.0:
-            A[0] = A[0] - 0.01
-            self.target.set_position(A)
-        
+        if A[1] < -1.0:
+            v = 0.01
+        elif A[1] > 1.0:
+            v = -0.01
 
+        self.target.set_position(A + v)
+        
+    def reward(self) -> float:
+        #if self.robot.gripper.check_collision(self.target):
+        suc, _ = self.success()
+        if suc:
+            print('======================success!======================')
+            r = 10
+        else :
+            g_pos = self.target.get_position()
+            t_pos = self.robot.arm.get_tip().get_position()
+            dis_sqr = (g_pos[0]-t_pos[0]) * (g_pos[0]-t_pos[0]) + (g_pos[1]-t_pos[1]) * (g_pos[1]-t_pos[1]) + (g_pos[2]-t_pos[2]) * (g_pos[2]-t_pos[2])
+            dis = math.sqrt(dis_sqr)
+            r = 0 - dis
+        return r
