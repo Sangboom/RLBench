@@ -36,6 +36,12 @@ class ReachTarget(Task):
         #              min_rotation=(0, 0, 0), max_rotation=(0, 0, 0))
         #   org
         b.sample(self.target, min_distance=0.2, min_rotation=(0, 0, 0), max_rotation=(0, 0, 0))
+        
+        #randomize robot initial pose
+        action = np.random.normal(-1, 1, size=(3,))
+        joint_positions = self.robot.arm.solve_ik(
+            action, quaternion=[0, 0, 0, 1], relative_to=None)
+        self.robot.arm.set_joint_target_positions(joint_positions)
 
         return ['reach the %s target' % color_name,
                 'touch the %s ball with the panda gripper' % color_name,

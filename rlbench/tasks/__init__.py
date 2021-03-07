@@ -100,6 +100,8 @@ from rlbench.tasks.water_plants import WaterPlants
 from rlbench.tasks.weighing_scales import WeighingScales
 from rlbench.tasks.wipe_desk import WipeDesk
 
+from rlbench.tasks.reach_moving_target import ReachMovingTarget
+
 FS10_V1 = {
     'train': [
         ReachTarget,
