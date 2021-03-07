@@ -44,6 +44,7 @@ class ReachMovingTarget(Task):
 
     def step(self) -> None:
         A = self.target.get_position()
+        v = 0.01
         if A[1] < -1.0:
             v = 0.01
         elif A[1] > 1.0:
